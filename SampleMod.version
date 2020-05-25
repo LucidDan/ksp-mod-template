@@ -1,0 +1,32 @@
+{
+  "NAME": "SampleMod",
+  "URL": "https://github.com/LucidDan/SampleMod/SampleMod.version?",
+  "CHANGE_LOG_URL": "https://github.com/LucidDan/SampleMod/blob/master/CHANGELOG.md",
+  "CHANGE_LOG": "???",
+  "DOWNLOAD": "https://github.com/LucidDan/SampleMod/releases",
+  "GITHUB": {
+    "USERNAME": "LucidDan",
+    "REPOSITORY": "SampleMod"
+  },
+  "VERSION": {
+    "MAJOR": 1,
+    "MINOR": 0,
+    "PATCH": 0,
+    "BUILD": 0
+  },
+  "KSP_VERSION": {
+    "MAJOR": 1,
+    "MINOR": 9,
+    "PATCH": 1
+  },
+  "KSP_VERSION_MIN": {
+    "MAJOR": 1,
+    "MINOR": 9,
+    "PATCH": 1
+  },
+  "KSP_VERSION_MAX": {
+    "MAJOR": 1,
+    "MINOR": 9,
+    "PATCH": 9
+  }
+}

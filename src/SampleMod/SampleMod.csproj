@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <!-- Following only works on Visual Studio and (coupled with the TransformOnBuild property item below) will compile .tt files in the project automatically -->
+    <!-- For other environments we have to use a Beforebuild task -->
+    <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v16.0\TextTemplating\Microsoft.TextTemplating.targets" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v16.0\TextTemplating\Microsoft.TextTemplating.targets')" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{FB47219F-2191-4C88-8877-3FB4F15AFD79}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>SampleMod</RootNamespace>
+        <AssemblyName>SampleMod</AssemblyName>
+        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <LangVersion>8</LangVersion>
+        <Nullable>enable</Nullable>
+        <TransformOnBuild>true</TransformOnBuild>
+        <BuildDir>$(ProjectDir)\..\..\GameData\LucidDan\SampleMod</BuildDir>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>portable</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="ToolbarControl, Version=0.1.9.4, Culture=neutral, PublicKeyToken=null">
+            <Private>False</Private>
+            <HintPath>$(KSPDir)/ToolbarControl.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="Properties\AssemblyInfo.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
+        </Content>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="ModManager.cs" />
+        <Compile Include="DataManager.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs">
+          <AutoGen>True</AutoGen>
+          <DesignTime>True</DesignTime>
+          <DependentUpon>AssemblyInfo.tt</DependentUpon>
+        </Compile>
+        <Compile Include="SceneManager.cs" />
+        <Compile Include="Settings.cs" />
+        <Compile Include="Utils.cs" />
+        <Compile Include="ToolbarRegistration.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\SampleMod.Unity\SampleMod.Unity.csproj">
+        <Project>{b5aacf64-1aba-4c22-ac53-0e8b029760f2}</Project>
+        <Name>SampleMod.Unity</Name>
+      </ProjectReference>
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="luciddan.ksplibs" Version="1.9.1" />
+      <PackageReference Include="Mono.TextTransform" Version="1.0.0" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets. -->
+    <!-- Run the following only if VS texttemplating target is not found -->
+    <Target Name="BeforeBuild" Condition="!Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v16.0\TextTemplating\Microsoft.TextTemplating.targets')">
+        <!-- (run t4 tool over any .tt files in the project) -->
+    </Target>
+    <Target Name="AfterBuild">
+        <ItemGroup>
+            <_TargetFiles Include="$(TargetPath)" />
+            <_TargetFiles Include="$(TargetDir)$(TargetName).pdb" Condition="$(Configuration) == 'DEBUG'" />
+        </ItemGroup>
+        <Copy SourceFiles="@(_TargetFiles)" DestinationFolder="$(BuildDir)" />
+    </Target>
+</Project>

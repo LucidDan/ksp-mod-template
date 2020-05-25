@@ -1,0 +1,72 @@
+<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Runtime.Serialization" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Runtime.Serialization" #>
+<#@ import namespace="System.Runtime.Serialization.Json" #>
+<#@ output extension=".cs" #>
+//
+// ----- WARNING: This file is auto-generated. Edit the AssemblyInfo.tt, not the .cs -----
+//
+using System.Reflection;
+using System.Runtime.InteropServices;
+
+[assembly: AssemblyTitle("<#= ModInfo.Info.NAME #>.Unity")]
+[assembly: AssemblyDescription("Unity integration module")]
+[assembly: AssemblyCopyright("Copyright © Dan Sloan 2020")]
+[assembly: Guid("A0FDE462-1ABA-BC82-FF53-0E8B029760F2")]
+[assembly: ComVisible(false)]
+[assembly: AssemblyVersion("<#= ModInfo.getModuleVersion() #>")]
+[assembly: AssemblyFileVersion("<#= ModInfo.getModuleVersion() #>")]
+
+[assembly: KSPAssemblyDependency("ToolbarController", 1, 0)]
+
+<#+
+    [DataContract] public class ModuleVersionInfo
+    {
+        [DataMember] public string MAJOR;
+        [DataMember] public string MINOR;
+        [DataMember] public string PATCH;
+        [DataMember(EmitDefaultValue = false, IsRequired = false)] public string BUILD;
+    }
+    
+    [DataContract] public class ModuleInfo
+    {
+        [DataMember] public string NAME;
+        [DataMember] public string URL;
+        [DataMember] public string CHANGE_LOG_URL;
+        [DataMember] public string CHANGE_LOG;
+        [DataMember] public string DOWNLOAD;
+        [DataMember] public ModuleVersionInfo VERSION;
+        [DataMember] public ModuleVersionInfo KSP_VERSION;
+        [DataMember] public ModuleVersionInfo KSP_VERSION_MIN;
+        [DataMember] public ModuleVersionInfo KSP_VERSION_MAX;
+    }
+
+    public class ModInfo
+    {
+        static ModuleInfo _info;
+
+        public static ModuleInfo ReadFileData(string jsonFileName)
+        {
+            if (_info != null) return _info;
+            if (!File.Exists(jsonFileName))
+            {
+                throw new Exception($"File '{jsonFileName}' could not be found.");
+            }
+            var fs = File.OpenRead(jsonFileName);
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(ModuleInfo));
+            
+            _info = (ModuleInfo)ser.ReadObject(fs);
+            return _info;
+        }
+
+        public static ModuleInfo Info => ReadFileData("../../../SampleMod.version");
+
+        // Convenience function to concatenate version info into a single value
+        public static  string getModuleVersion()
+        {
+            return $"{Info.VERSION.MAJOR}.{Info.VERSION.MINOR}.{Info.VERSION.PATCH}.{Info.VERSION.BUILD}";
+        }
+    }
+#>

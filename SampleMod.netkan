@@ -1,0 +1,45 @@
+{
+  "spec_version"   : "v1.26",
+  "name"           : "SampleMod",
+  "abstract"       : "Lucid Dan's Sample Mod",
+  "identifier"     : "LDSampleMod",
+  "download"       : "https://github.com/LucidDan/SampleMod/releases/samplemod-1.6.0.0.zip",
+  "license"        : "MIT",
+  "version"        : "1.6.0.0",
+  "release_status" : "stable",
+  "ksp_version"    : "1.9.1",
+  "ksp_version_min": "1.8.0",
+  "ksp_version_max": "1.9.9",
+  "ksp_version_strict": false,
+  "localizations"  : [
+    "en-us"
+  ],
+  "author"         : "Dan Sloan <dan@luciddan.com>",
+  "description"    : "Sample mod demonstrating functionality and automation of build process, etc",
+  "resources" : {
+    "homepage"     : "https://github.com/LucidDan/SampleMod/",
+    "repository"   : "https://github.com/LucidDan/SampleMod",
+    "bugtracker"   : "https://github.com/LucidDan/SampleMod/issues",
+    "license"      : "https://github.com/LucidDan/SampleMod/blob/master/LICENSE.md",
+    "ci"           : "https://github.com/LucidDan/SampleMod/actions",
+    "spacedock"    : "nope",
+    "curse"        : "nope",
+    "manual"       : "https://github.com/LucidDan/SampleMod/wiki/"
+  },
+  "tags" : [
+    "sample"
+  ],
+  "install" : [
+    {
+      "file"       : "GameData/LucidDan/SampleMod",
+      "install_to" : "GameData/LucidDan"
+    }
+  ],
+  "depends" : [
+    { "name" : "ToolbarController", "min_version" : "0.1.9.0" },
+    { "name" : "ModuleManager", "min_version" : "4.1.0" }
+  ],
+  "recommends" : [
+  ]
+}
+
