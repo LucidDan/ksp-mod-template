@@ -152,7 +152,7 @@ unity/[Aa]ssets/AssetStoreTools*
 unity/[Aa]ssets/Plugins/Editor/JetBrains*
 
 # Visual Studio cache directory
-src/.vs/
+.vs/
 unity/.vs/
 
 # Gradle cache directory
