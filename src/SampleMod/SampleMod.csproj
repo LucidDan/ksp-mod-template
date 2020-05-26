@@ -18,7 +18,7 @@
         <Nullable>enable</Nullable>
         <TransformOnBuild>true</TransformOnBuild>
         <BuildDir>..\..\GameData\LucidDan\SampleMod</BuildDir>
-        <KspDir>..\..\dependencies\KSP</KspDir>
+        <PluginsDir>..\..\dependencies\plugins</PluginsDir>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,7 +46,7 @@
         <Reference Include="ToolbarControl, Version=0.1.9.4, Culture=neutral, PublicKeyToken=null">
             <SpecificVersion>False</SpecificVersion>
             <Private>False</Private>
-          <HintPath>../../dependencies/KSP/GameData/001_ToolbarControl/Plugins/ToolbarControl.dll</HintPath>
+          <HintPath>$(PluginsDir)\ToolbarControl.dll</HintPath>
         </Reference>
     </ItemGroup>
     <ItemGroup>
