@@ -1,6 +1,10 @@
 # Ignore anything we bring in via ckan in dependencies/KSP
 dependencies/KSP/
 
+# Ignore asset bundle definition files for the KSP asset compiler
+unity/Assets/XML/
+unity/Assets/XML.meta
+
 #
 *.suo
 *.user
