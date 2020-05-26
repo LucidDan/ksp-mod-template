@@ -97,8 +97,8 @@ src/SampleMod.Unity/obj/
 
 # Not sure - shoul this be disabled? 
 # JetBrains Rider
-src/.idea/
-src/*.sln.iml
+.idea/
+*.sln.iml
 
 # MSBuild Binary and Structured Log
 *.binlog
@@ -113,8 +113,8 @@ src/*.sln.iml
 desktop.ini
 
 # Build artifacts
-GameData/*.dll
-GameData/*.bundle
+GameData/**/*.dll
+GameData/**/*.bundle
 
 unity/AssetBundles/
 unity/.idea/

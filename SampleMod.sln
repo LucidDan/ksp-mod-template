@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleMod", "SampleMod\SampleMod.csproj", "{FB47219F-2191-4C88-8877-3FB4F15AFD79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleMod", "src\SampleMod\SampleMod.csproj", "{FB47219F-2191-4C88-8877-3FB4F15AFD79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleMod.Unity", "SampleMod.Unity\SampleMod.Unity.csproj", "{B5AACF64-1ABA-4C22-AC53-0E8B029760F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleMod.Unity", "src\SampleMod.Unity\SampleMod.Unity.csproj", "{B5AACF64-1ABA-4C22-AC53-0E8B029760F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
