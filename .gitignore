@@ -1,6 +1,6 @@
-# This .gitignore file should be placed at the root of your Unity project directory
-#
-# Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
+# Ignore anything we bring in via ckan in dependencies/KSP
+dependencies/KSP/
+
 #
 *.suo
 *.user
