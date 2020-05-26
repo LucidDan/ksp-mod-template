@@ -10,7 +10,7 @@ public class AssetBundleBuilder
     {
         // Do all of our asset building
         // System.Environment.GetCommandLineArgs for any command line arg processing
-        // This will build all asset bundles using an extension of ".ksp", and compressing the files.
+        // This will build all asset bundles and compress the files. Note that it never adds "ksp" as extension (?)
         AssetCompiler.BuildAssetBundles(true, true, "ksp", null);
         // Afterward, we want to copy the resulting bundles from <projectroot>\unity\AssetBundles\*.ksp --> <projectroot>\GameData\<vendor>\<modname>\
         EditorApplication.Exit(0);
