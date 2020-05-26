@@ -44,6 +44,11 @@
     <ItemGroup>
         <Compile Include="Interface\IMainWindowPanel.cs" />
         <Compile Include="MainWindowPanel.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs">
+            <AutoGen>True</AutoGen>
+            <DesignTime>True</DesignTime>
+            <DependentUpon>AssemblyInfo.tt</DependentUpon>
+        </Compile>
     </ItemGroup>
     <ItemGroup>
       <Content Include="Properties\AssemblyInfo.tt">
@@ -53,7 +58,6 @@
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="luciddan.ksplibs" Version="1.9.1" />
-      <PackageReference Include="Mono.TextTransform" Version="1.0.0" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

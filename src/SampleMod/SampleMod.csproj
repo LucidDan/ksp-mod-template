@@ -76,7 +76,6 @@
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="luciddan.ksplibs" Version="1.9.1" />
-      <PackageReference Include="Mono.TextTransform" Version="1.0.0" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -92,6 +91,9 @@
         <ItemGroup>
             <_TargetFiles Include="$(TargetPath)" />
             <_TargetFiles Include="$(TargetDir)$(TargetName).pdb" Condition="$(Configuration) == 'DEBUG'" />
+            <!-- Copy Unity DLL as well. We do it here because then we don't need $BuildDir defined in the unity csproj -->
+            <_TargetFiles Include="$(TargetDir)$(TargetName).Unity.dll" />
+            <_TargetFiles Include="$(TargetDir)$(TargetName).Unity.pdb" Condition="$(Configuration) == 'DEBUG'" />
         </ItemGroup>
         <Copy SourceFiles="@(_TargetFiles)" DestinationFolder="$(BuildDir)" />
     </Target>
