@@ -1,5 +1,0 @@
-[submodule "dependencies/ToolbarControl"]
-	path = dependencies/ToolbarControl
-	url = https://github.com/linuxgurugamer/ToolbarControl.git
-	branch = master
-
