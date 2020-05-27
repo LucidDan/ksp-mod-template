@@ -5,19 +5,22 @@
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>portable</DebugType>
-    <AssemblyName>SampleMod.Unity</AssemblyName>
-    <AssemblyTitle>Unity integration module for SampleMod</AssemblyTitle>
+    <VendorName>LucidDan</VendorName>
+    <ModName>SampleMod</ModName>
+    <AssemblyName>$(ModName).Unity</AssemblyName>
+    <AssemblyTitle>Unity integration module for $(ModName)</AssemblyTitle>
     <Copyright>Copyright (c) 2020 Daniel Sloan</Copyright>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <Title>SampleMod.Unity</Title>
-    <Authors>LucidDan</Authors>
-    <Description>Unity integration module for SampleMod</Description>
-    <PackageProjectUrl>https://github.com/LucidDan/SampleMod/</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/LucidDan/SampleMod/blob/master/LICENSE.md</PackageLicenseUrl>
-    <RepositoryUrl>https://github.com/LucidDan/SampleMod/</RepositoryUrl>
+    <Title>$(ModName).Unity</Title>
+    <Authors>$(VendorName)</Authors>
+    <Description>Unity integration module for $(ModName)</Description>
+    <PackageProjectUrl>https://github.com/$(VendorName)/$(ModName)/</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/$(VendorName)/$(ModName)/blob/master/LICENSE.md</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/$(VendorName)/$(ModName)/</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Company>LucidDan</Company>
+    <Company>$(VendorName)</Company>
+    <!-- Output the DLL to the Unity project, as it will be referenced in Unity prefabs (that's the whole point of this integration module) --> 
     <OutputPath>../../unity/Assets/Runtime/</OutputPath>
   </PropertyGroup>
   <ItemGroup>

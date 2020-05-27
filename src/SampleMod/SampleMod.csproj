@@ -3,23 +3,25 @@
     <TargetFramework>net48</TargetFramework>
     <LangVersion>8</LangVersion>
     <Nullable>enable</Nullable>
-    <BuildDir>..\..\GameData\LucidDan\SampleMod</BuildDir>
+    <VendorName>LucidDan</VendorName>
+    <ModName>SampleMod</ModName>
+    <BuildDir>..\..\GameData\$(VendorName)\$(ModName)</BuildDir>
     <PluginsDir>..\..\dependencies\plugins</PluginsDir>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>portable</DebugType>
-    <AssemblyName>SampleMod</AssemblyName>
-    <AssemblyTitle>Plugin code for SampleMod</AssemblyTitle>
+    <AssemblyName>$(ModName)</AssemblyName>
+    <AssemblyTitle>Plugin code for $(ModName)</AssemblyTitle>
     <Copyright>Copyright (c) 2020 Daniel Sloan</Copyright>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <Title>SampleMod</Title>
-    <Authors>LucidDan</Authors>
-    <Description>Plugin code for SampleMod</Description>
-    <PackageProjectUrl>https://github.com/LucidDan/SampleMod/</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/LucidDan/SampleMod/blob/master/LICENSE.md</PackageLicenseUrl>
-    <RepositoryUrl>https://github.com/LucidDan/SampleMod/</RepositoryUrl>
+    <Title>$(ModName)</Title>
+    <Authors>$(VendorName)</Authors>
+    <Description>Plugin code for $(ModName)</Description>
+    <PackageProjectUrl>https://github.com/$(VendorName)/$(ModName)/</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/$(VendorName)/$(ModName)/blob/master/LICENSE.md</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/$(VendorName)/$(ModName)/</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Company>LucidDan</Company>
+    <Company>$(VendorName)</Company>
   </PropertyGroup>
   <Target Name="CopyFilesAfterBuild" AfterTargets="PostBuildEvent">
     <ItemGroup>
