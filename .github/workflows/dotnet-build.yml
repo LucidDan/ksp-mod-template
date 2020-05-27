@@ -80,7 +80,6 @@ jobs:
         unityVersion: 2019.2.2f1
         targetPlatform: StandaloneWindows
         buildMethod: AssetBundleBuilder.RunAssetBuild
-        versioning: None
         #customParameters: "-accept-apiupdate -batchmode"
     # Output 
     - uses: actions/upload-artifact@v1
