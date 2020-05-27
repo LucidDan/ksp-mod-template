@@ -25,7 +25,7 @@ jobs:
         nuget-version: latest
         #nuget-api-key: ${{ secrets.NUGET_API_KEY }}
     - name: add GPR as a package sources
-      run: nuget source Add -Name "GPR" -Source ${{ secrets.GPR_URI }} -UserName ${{ secrets.GPR_USERNAME }} -Password ${{ secrets.GITHUB_TOKEN }}
+      run: nuget source Add -Name "GPR" -Source ${{ secrets.GPR_URI }} -UserName ${{ secrets.GPR_USERNAME }} -Password ${{ secrets.GPR_TOKEN }}
     - name: msbuild
       run: msbuild -restore:True -p:Configuration=Release
     - uses: actions/upload-artifact@v1
