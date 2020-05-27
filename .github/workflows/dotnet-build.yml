@@ -1,0 +1,80 @@
+name: .NET Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
+jobs:
+  build-dotnet:
+    name: Build .NET project
+    runs-on: windows-2019
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.300
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    #- name: Test
+    #  run: dotnet test --no-restore --verbosity normal
+    - uses: actions/upload-artifact@v1
+      with:
+        name: UnityDLL
+        path: unity/Assets/Runtime/
+    - uses: actions/upload-artifact@v1
+      with:
+        name: PluginFiles
+        path: GameData
+
+  build-unitybundle:
+    name: Build Unity Asset Bundles
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        lfs: true
+
+    # Cache
+    - uses: actions/cache@v1.1.0
+      with:
+        path: Library
+        key: Library
+    - name: Download UnityDLL from dotnet build
+      uses: actions/download-artifact@v2
+      with:
+        # Artifact name
+        name: UnityDLL
+        # Destination path
+        path: unity/Assets/Runtime/
+    - name: Download Plugin Files
+      uses: actions/download-artifact@v2
+      with:
+        # Artifact name
+        name: PluginFiles
+        # Destination path
+        path: GameData
+    # Build
+    - name: Build project
+      uses: webbertakken/unity-builder@v0.10
+      with:
+        projectPath: ./unity
+        unityVersion: 2019.2.2f1
+        targetPlatform: StandaloneWindows
+        customParameters: "-accept-apiupdate -batchmode -executeMethod AssetBundleBuilder.RunAssetBuild"
+    # Output 
+    - uses: actions/upload-artifact@v1
+      with:
+        name: AssetBundle
+        path: GameData
+# TODO: Add make-release and so forth
