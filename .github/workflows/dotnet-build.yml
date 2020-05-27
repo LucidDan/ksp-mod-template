@@ -52,7 +52,7 @@ jobs:
     - uses: actions/cache@v1.1.0
       with:
         path: unity/Library
-        key: Library
+        key: Library-Unity-KSP
     - name: Download UnityDLL from dotnet build
       uses: actions/download-artifact@v2
       with:
@@ -67,14 +67,20 @@ jobs:
         name: PluginFiles
         # Destination path
         path: GameData
+    # Activate
+    - name: Activate license
+      uses: webbertakken/unity-activate@v1.2
+      with:
+        unityVersion: 2019.2.2f1
     # Build
     - name: Build project
       uses: webbertakken/unity-builder@v1.0
       with:
-        projectPath: ./unity
+        projectPath: unity
         unityVersion: 2019.2.2f1
         targetPlatform: StandaloneWindows
         buildMethod: AssetBundleBuilder.RunAssetBuild
+        versioning: None
         #customParameters: "-accept-apiupdate -batchmode"
     # Output 
     - uses: actions/upload-artifact@v1
