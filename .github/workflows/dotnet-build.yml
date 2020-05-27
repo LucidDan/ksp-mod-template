@@ -19,12 +19,15 @@ jobs:
     - uses: actions/checkout@v2
     - name: Setup msbuild
       uses: microsoft/setup-msbuild@v1.0.0
-    - name: add GPR as a package source
-      run: nuget source Add -Name GPR -Source https://nuget.pkg.github.com/luciddan/index.json -Username luciddan -Password "${NUGET_AUTH_TOKEN}" -NonInteractive
-    - name: restore nuget packages
-      run: nuget restore
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.2
+      with:
+        nuget-version: latest
+        #nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+    - name: add GPR as a package sources
+      run: nuget source Add -Name "GPR" -Source ${{ secrets.GPR_URI }} -UserName ${{ secrets.GPR_USERNAME }} -Password ${{ secrets.GITHUB_TOKEN }}
     - name: msbuild
-      run: msbuild -p:Configuration=Release
+      run: msbuild -restore:True -p:Configuration=Release
     - uses: actions/upload-artifact@v1
       with:
         name: UnityDLL
