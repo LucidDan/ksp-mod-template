@@ -139,11 +139,11 @@ unity/[Mm]emoryCaptures/
 unity/Assets/XML/
 unity/Assets/XML.meta
 
-# Also ignore DLLs from msbuild that get dropped in to the unity project
-unity/Assets/Runtime/*.dll
-unity/Assets/Runtime/*.dll.meta
-unity/Assets/Runtime/*.pdb
-unity/Assets/Runtime/*.pdb.meta
+# Also ignore DLLs from dotnet that get dropped in to the unity project
+unity/Assets/Runtime/**/*.dll
+unity/Assets/Runtime/**/*.dll.meta
+unity/Assets/Runtime/**/*.pdb
+unity/Assets/Runtime/**/*.pdb.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 unity/[Aa]ssets/AssetStoreTools*
