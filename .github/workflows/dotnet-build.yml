@@ -23,9 +23,11 @@ jobs:
         dotnet-version: 3.1.300
         owner: luciddan
         source-url: https://nuget.pkg.github.com/luciddan/index.json
-        config-file: NuGet.Config
+        config-file: nuget.config
     - name: Debug
       run: cat ..\..\nuget.config
+    - name: Debug again
+      run: cat nuget.config
     - name: Install dependencies
       run: dotnet restore
     - name: Build
