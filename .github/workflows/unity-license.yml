@@ -2,7 +2,7 @@
 #  license
 
 name: Acquire license request file
-on: push
+on: repository_dispatch
 
 jobs:
   activation:
