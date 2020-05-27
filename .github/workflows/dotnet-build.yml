@@ -25,7 +25,7 @@ jobs:
         source-url: https://nuget.pkg.github.com/luciddan/index.json
         config-file: NuGet.Config
     - name: Debug
-      run: cat ..\nuget.config
+      run: cat ..\..\nuget.config
     - name: Install dependencies
       run: dotnet restore
     - name: Build
