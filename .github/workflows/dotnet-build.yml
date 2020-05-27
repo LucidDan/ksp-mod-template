@@ -17,23 +17,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.300
-        owner: luciddan
-        source-url: https://nuget.pkg.github.com/luciddan/index.json
-        config-file: nuget.config
-    - name: Debug
-      run: cat ..\..\nuget.config
-    - name: Debug again
-      run: cat nuget.config
-    - name: Install dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-    #- name: Test
-    #  run: dotnet test --no-restore --verbosity normal
+    - name: Setup msbuild
+      uses: microsoft/setup-msbuild@v1.0.0
+    - name: add GPR as a package source
+      run: nuget source Add -Name GPR -Source https://nuget.pkg.github.com/luciddan/index.json -Username luciddan -Password "${NUGET_AUTH_TOKEN}" -NonInteractive
+    - name: restore nuget packages
+      run: nuget restore
+    - name: msbuild
+      run: msbuild -p:Configuration=Release
     - uses: actions/upload-artifact@v1
       with:
         name: UnityDLL
