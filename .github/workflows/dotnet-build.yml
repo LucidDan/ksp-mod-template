@@ -8,7 +8,7 @@ on:
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-  NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  NUGET_AUTH_TOKEN: ${{secrets.GPR_TOKEN}}
 
 jobs:
   build-dotnet:
