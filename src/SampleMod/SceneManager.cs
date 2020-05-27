@@ -19,7 +19,7 @@ namespace SampleMod
             if (_toolbarControl == null) return;
 
             //toolbarButtonPosition = _toolbarControl.buttonClickedMousePos;
-            var menuPosition = new Vector2(1, 1);
+            Vector2 menuPosition = new Vector2(1, 1);
 
             Utils.Log($"Toolbar position: {menuPosition}");
             _mainWindow = Instantiate(ModManager.GetPrefab("MainWindow"),
@@ -73,10 +73,10 @@ namespace SampleMod
                 if (_toolbarControl != null)
                     _toolbarControl.AddToAllToolbars(ToggleOn, ToggleOff, HoverOn, HoverOff, OnEnable, OnDisable,
                         ApplicationLauncher.AppScenes.ALWAYS, ModManager.Name,
-                        "sampleModAppButton", ModManager.GetRelativeResourcePath("icon_lg_active"),
-                        ModManager.GetRelativeResourcePath("icon_lg_inactive"),
-                        ModManager.GetRelativeResourcePath("icon_sm_active"),
-                        ModManager.GetRelativeResourcePath("icon_sm_inactive"),
+                        "sampleModAppButton", ModManager.GetRelativeResourcePath("toolbar/icon_lg_active"),
+                        ModManager.GetRelativeResourcePath("toolbar/icon_lg_inactive"),
+                        ModManager.GetRelativeResourcePath("toolbar/icon_sm_active"),
+                        ModManager.GetRelativeResourcePath("toolbar/icon_sm_inactive"),
                         "SampleMod Dashboard");
         }
 
