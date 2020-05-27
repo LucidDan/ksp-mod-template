@@ -1,80 +1,26 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-    <PropertyGroup>
-        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{B5AACF64-1ABA-4C22-AC53-0E8B029760F2}</ProjectGuid>
-        <OutputType>Library</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>SampleMod.Unity</RootNamespace>
-        <AssemblyName>SampleMod.Unity</AssemblyName>
-        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-        <FileAlignment>512</FileAlignment>
-        <LangVersion>8</LangVersion>
-        <Nullable>enable</Nullable>
-        <TransformOnBuild>true</TransformOnBuild>
-        <UnityAssetDir>..\..\unity\Assets\Runtime\</UnityAssetDir>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugSymbols>true</DebugSymbols>
-        <DebugType>full</DebugType>
-        <Optimize>false</Optimize>
-        <OutputPath>bin\Debug\</OutputPath>
-        <DefineConstants>DEBUG;TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugType>portable</DebugType>
-        <Optimize>true</Optimize>
-        <OutputPath>bin\Release\</OutputPath>
-        <DefineConstants>TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    </PropertyGroup>
-    <ItemGroup>
-        <Reference Include="System" />
-        <Reference Include="System.Xml" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Interface\IMainWindowPanel.cs" />
-        <Compile Include="MainWindowPanel.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs">
-            <AutoGen>True</AutoGen>
-            <DesignTime>True</DesignTime>
-            <DependentUpon>AssemblyInfo.tt</DependentUpon>
-        </Compile>
-    </ItemGroup>
-    <ItemGroup>
-      <Content Include="Properties\AssemblyInfo.tt">
-        <Generator>TextTemplatingFileGenerator</Generator>
-        <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
-      </Content>
-    </ItemGroup>
-    <ItemGroup>
-      <PackageReference Include="luciddan.ksplibs" Version="1.9.1" />
-    </ItemGroup>
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-         Other similar extension points exist, see Microsoft.Common.targets.
-    <Target Name="BeforeBuild">
-    </Target>
-    <Target Name="AfterBuild">
-    </Target>
-    -->
-    <Target Name="AfterBuild">
-        <!-- Copy the DLL in to the Unity project, so it can be linked to prefabs -->
-        <ItemGroup>
-            <_TargetFiles Include="$(TargetPath)" />
-            <!-- Not sure there is any reason we need debug symbols in the Unity project, but just in case... -->
-            <_TargetFiles Include="$(TargetDir)$(TargetName).pdb" Condition="$(Configuration) == 'DEBUG'" />
-        </ItemGroup>
-        <Copy SourceFiles="@(_TargetFiles)" DestinationFolder="$(UnityAssetDir)" />
-    </Target>
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>8</LangVersion>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugType>portable</DebugType>
+    <AssemblyName>SampleMod.Unity</AssemblyName>
+    <AssemblyTitle>Unity integration module for SampleMod</AssemblyTitle>
+    <Copyright>Copyright (c) 2020 Daniel Sloan</Copyright>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Title>SampleMod.Unity</Title>
+    <Authors>LucidDan</Authors>
+    <Description>Unity integration module for SampleMod</Description>
+    <PackageProjectUrl>https://github.com/LucidDan/SampleMod/</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/LucidDan/SampleMod/blob/master/LICENSE.md</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/LucidDan/SampleMod/</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Company>LucidDan</Company>
+    <OutputPath>../../unity/Assets/Runtime/</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="luciddan.ksplibs" Version="1.9.1" />
+  </ItemGroup>
 </Project>
