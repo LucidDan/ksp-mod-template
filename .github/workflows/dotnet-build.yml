@@ -21,7 +21,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.300
+        owner: luciddan
         source-url: https://nuget.pkg.github.com/luciddan/index.json
+        config-file: NuGet.Config
     - name: Install dependencies
       run: dotnet restore
     - name: Build
