@@ -78,9 +78,9 @@ jobs:
       with:
         projectPath: unity
         unityVersion: 2019.2.2f1
-        targetPlatform: StandaloneWindows
+        targetPlatform: Win
         buildMethod: AssetBundleBuilder.RunAssetBuild
-        #customParameters: "-accept-apiupdate -batchmode"
+        customParameters: -accept-apiupdate
     # Output 
     - uses: actions/upload-artifact@v1
       with:
