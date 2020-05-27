@@ -8,6 +8,7 @@ on:
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
 jobs:
   build-dotnet:
@@ -20,6 +21,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.300
+        source-url: https://nuget.pkg.github.com/luciddan/index.json
     - name: Install dependencies
       run: dotnet restore
     - name: Build
