@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-    if: !contains('${{ env.UNITY_LICENSE }}', 'SignatureValue')
+    if: "!contains('${{ env.UNITY_LICENSE }}', 'SignatureValue')"
     steps:
       - name: Request manual activation file
         id: getManualLicenseFile
