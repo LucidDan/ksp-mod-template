@@ -42,7 +42,7 @@ jobs:
   unity-license-acquire:
     name: Request manual activation file
     runs-on: ubuntu-latest
-    if: contains('${{ env.UNITY_LICENSE }}', 'SignatureValue') == false
+    if: contains(env.UNITY_LICENSE, 'SignatureValue') == false
     steps:
       - name: Request manual activation file
         id: getManualLicenseFile
@@ -59,7 +59,7 @@ jobs:
     name: Build Unity Asset Bundles
     runs-on: ubuntu-latest
     needs: build-plugin
-    if: contains('${{ env.UNITY_LICENSE }}', 'SignatureValue')
+    if: contains(env.UNITY_LICENSE, 'SignatureValue')
     steps:
     # Checkout
     - name: Checkout repository
