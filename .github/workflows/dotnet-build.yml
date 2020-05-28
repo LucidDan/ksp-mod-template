@@ -7,6 +7,7 @@ on:
     branches: [ master ]
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  UNITY_VERSION: 2019.2.11f1
   GPR_PASSWORD: ${{ secrets.GPR_TOKEN }}
   GPR_URI: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
 
@@ -57,7 +58,7 @@ jobs:
       id: getManualLicenseFile
       uses: webbertakken/unity-request-manual-activation-file@v1.1
       with:
-        unityVersion: 2019.2.2f1
+        unityVersion: ${{ env.UNITY_VERSION }}
     - name: Expose as artifact
       if: contains(env.UNITY_LICENSE, 'SignatureValue') == false
       uses: actions/upload-artifact@v1
@@ -85,7 +86,7 @@ jobs:
       uses: webbertakken/unity-builder@v1.0
       with:
         projectPath: unity
-        unityVersion: 2019.2.2f1
+        unityVersion: ${{ env.UNITY_VERSION }}
         targetPlatform: StandaloneWindows
         buildMethod: AssetBundleBuilder.RunAssetBuild
         #customParameters: -accept-apiupdate
