@@ -41,14 +41,17 @@ jobs:
   unity-license-acquire:
     name: Request manual activation file
     runs-on: ubuntu-latest
-    if: contains(env.UNITY_LICENSE, 'SignatureValue') == false
     steps:
       - name: Request manual activation file
+        # We have to do this check here, as you cannot use env. OR secrets. at the job level, only the step !! (wtf Github?)
+        if: contains(env.UNITY_LICENSE, 'SignatureValue') == false
         id: getManualLicenseFile
         uses: webbertakken/unity-request-manual-activation-file@v1.1
         with:
           unityVersion: 2019.2.2f1
       - name: Expose as artifact
+        # We have to do this check here, as you cannot use env. OR secrets. at the job level, only the step !! (wtf Github?)
+        if: contains(env.UNITY_LICENSE, 'SignatureValue') == false
         uses: actions/upload-artifact@v1
         with:
           name: ${{ steps.getManualLicenseFile.outputs.filePath }}
@@ -58,7 +61,6 @@ jobs:
     name: Build Unity Asset Bundles
     runs-on: ubuntu-latest
     needs: build-plugin
-    if: contains(env.UNITY_LICENSE, 'SignatureValue')
     steps:
     # Checkout
     - name: Checkout repository
@@ -72,6 +74,7 @@ jobs:
         key: Library-Unity-KSP
     # Activate
     - name: Activate license
+      if: contains(env.UNITY_LICENSE, 'SignatureValue')
       uses: webbertakken/unity-activate@v1.2
       with:
         unityVersion: 2019.2.2f1
@@ -92,6 +95,7 @@ jobs:
         path: GameData
     # Build
     - name: Build project
+      if: contains(env.UNITY_LICENSE, 'SignatureValue')
       uses: webbertakken/unity-builder@v1.0
       with:
         projectPath: unity
