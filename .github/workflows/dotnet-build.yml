@@ -58,7 +58,7 @@ jobs:
       id: getManualLicenseFile
       uses: webbertakken/unity-request-manual-activation-file@v1.1
       with:
-        unityVersion: ${{ env.UNITY_VERSION }}
+        unityVersion: ${{ env.UNITY_VERSION }}-windows
     - name: Expose as artifact
       if: contains(env.UNITY_LICENSE, 'SignatureValue') == false
       uses: actions/upload-artifact@v1
