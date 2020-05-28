@@ -7,7 +7,8 @@ on:
     branches: [ master ]
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-  NUGET_AUTH_TOKEN: ${{secrets.GPR_TOKEN}}
+  GPR_PASSWORD: ${{ secrets.GPR_TOKEN }}
+  GPR_URI: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
 
 jobs:
   build-plugin:
@@ -21,9 +22,8 @@ jobs:
       uses: NuGet/setup-nuget@v1.0.2
       with:
         nuget-version: latest
-        #nuget-api-key: ${{ secrets.NUGET_API_KEY }}
     - name: add GPR as a package sources
-      run: nuget source Add -Name "GPR" -Source ${{ secrets.GPR_URI }} -UserName ${{ secrets.GPR_USERNAME }} -Password ${{ secrets.GPR_TOKEN }}
+      run: nuget source Add -Name "GPR" -Source ${{ env.GPR_URI }} -UserName ${{ github.repository_owner }} -Password ${{ env.GPR_PASSWORD }}
     - name: msbuild
       run: msbuild -restore:True -p:Configuration=Release
     - uses: actions/upload-artifact@v1
@@ -53,14 +53,12 @@ jobs:
           unity/Library
         key: Library-Unity-KSP
     - name: Request manual activation file
-      # We have to do this check here, as you cannot use env. OR secrets. at the job level, only the step !! (wtf Github?)
       if: contains(env.UNITY_LICENSE, 'SignatureValue') == false
       id: getManualLicenseFile
       uses: webbertakken/unity-request-manual-activation-file@v1.1
       with:
         unityVersion: 2019.2.2f1
     - name: Expose as artifact
-      # We have to do this check here, as you cannot use env. OR secrets. at the job level, only the step !! (wtf Github?)
       if: contains(env.UNITY_LICENSE, 'SignatureValue') == false
       uses: actions/upload-artifact@v1
       with:
