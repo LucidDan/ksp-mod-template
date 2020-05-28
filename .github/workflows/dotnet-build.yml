@@ -5,15 +5,14 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  NUGET_AUTH_TOKEN: ${{secrets.GPR_TOKEN}}
 
 jobs:
   build-plugin:
     name: Build .NET project
     runs-on: windows-2019
-    env:
-      UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-      NUGET_AUTH_TOKEN: ${{secrets.GPR_TOKEN}}
     steps:
     - uses: actions/checkout@v2
     - name: Setup msbuild
