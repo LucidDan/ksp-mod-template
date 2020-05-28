@@ -64,12 +64,6 @@ jobs:
       with:
         name: ${{ steps.getManualLicenseFile.outputs.filePath }}
         path: ${{ steps.getManualLicenseFile.outputs.filePath }}
-    # Activate
-    - name: Activate license
-      if: contains(env.UNITY_LICENSE, 'SignatureValue')
-      uses: webbertakken/unity-activate@v1.2
-      with:
-        unityVersion: 2019.2.2f1
     # Get Assembly DLLs
     - name: Download UnityDLL from dotnet build
       uses: actions/download-artifact@v2
