@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-  UNITY_VERSION: 2019.2.11f1
+  UNITY_VERSION: 2019.2.2f1
   GPR_PASSWORD: ${{ secrets.GPR_TOKEN }}
   GPR_URI: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
 
