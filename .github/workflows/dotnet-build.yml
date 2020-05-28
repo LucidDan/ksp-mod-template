@@ -46,25 +46,26 @@ jobs:
       with:
         lfs: true
     # Cache
-    - uses: actions/cache@v1.1.0
+    - name: Cache
+      uses: actions/cache@v1.1.0
       with:
         path: |
           unity/Library
         key: Library-Unity-KSP
     - name: Request manual activation file
-        # We have to do this check here, as you cannot use env. OR secrets. at the job level, only the step !! (wtf Github?)
-        if: contains(env.UNITY_LICENSE, 'SignatureValue') == false
-        id: getManualLicenseFile
-        uses: webbertakken/unity-request-manual-activation-file@v1.1
-        with:
-          unityVersion: 2019.2.2f1
-      - name: Expose as artifact
-        # We have to do this check here, as you cannot use env. OR secrets. at the job level, only the step !! (wtf Github?)
-        if: contains(env.UNITY_LICENSE, 'SignatureValue') == false
-        uses: actions/upload-artifact@v1
-        with:
-          name: ${{ steps.getManualLicenseFile.outputs.filePath }}
-          path: ${{ steps.getManualLicenseFile.outputs.filePath }}
+      # We have to do this check here, as you cannot use env. OR secrets. at the job level, only the step !! (wtf Github?)
+      if: contains(env.UNITY_LICENSE, 'SignatureValue') == false
+      id: getManualLicenseFile
+      uses: webbertakken/unity-request-manual-activation-file@v1.1
+      with:
+        unityVersion: 2019.2.2f1
+    - name: Expose as artifact
+      # We have to do this check here, as you cannot use env. OR secrets. at the job level, only the step !! (wtf Github?)
+      if: contains(env.UNITY_LICENSE, 'SignatureValue') == false
+      uses: actions/upload-artifact@v1
+      with:
+        name: ${{ steps.getManualLicenseFile.outputs.filePath }}
+        path: ${{ steps.getManualLicenseFile.outputs.filePath }}
     # Activate
     - name: Activate license
       if: contains(env.UNITY_LICENSE, 'SignatureValue')
