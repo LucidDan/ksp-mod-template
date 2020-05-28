@@ -8,7 +8,7 @@ on:
 
 
 jobs:
-  build-dotnet:
+  build-plugin:
     name: Build .NET project
     runs-on: windows-2019
     env:
@@ -35,24 +35,51 @@ jobs:
         name: PluginFiles
         path: GameData
 
+  # Seems like we need to run this inside the same workflow, otherwise the
+  # unity machine ID returned is a different one.
+  # what we can do is make it only run if UNITY_LICENSE is not set/empty
+  unity-license-acquire:
+    name: Request manual activation file
+    runs-on: ubuntu-latest
+    env:
+      UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+    if: !contains('${{ env.UNITY_LICENSE }}', 'SignatureValue')
+    steps:
+      - name: Request manual activation file
+        id: getManualLicenseFile
+        uses: webbertakken/unity-request-manual-activation-file@v1.1
+        with:
+          unityVersion: 2019.2.2f1
+      - name: Expose as artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ steps.getManualLicenseFile.outputs.filePath }}
+          path: ${{ steps.getManualLicenseFile.outputs.filePath }}
+
   build-unitybundle:
     name: Build Unity Asset Bundles
     runs-on: ubuntu-latest
-    needs: build-dotnet
+    needs: build-plugin
     env:
       UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+    if: contains('${{ env.UNITY_LICENSE }}', 'SignatureValue')
     steps:
     # Checkout
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
         lfs: true
-
     # Cache
     - uses: actions/cache@v1.1.0
       with:
         path: unity/Library
         key: Library-Unity-KSP
+    # Activate
+    - name: Activate license
+      uses: webbertakken/unity-activate@v1.2
+      with:
+        unityVersion: 2019.2.2f1
+    # Get Assembly DLLs
     - name: Download UnityDLL from dotnet build
       uses: actions/download-artifact@v2
       with:
@@ -67,11 +94,6 @@ jobs:
         name: PluginFiles
         # Destination path
         path: GameData
-    # Activate
-    - name: Activate license
-      uses: webbertakken/unity-activate@v1.2
-      with:
-        unityVersion: 2019.2.2f1
     # Build
     - name: Build project
       uses: webbertakken/unity-builder@v1.0
